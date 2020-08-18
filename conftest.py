@@ -7,7 +7,7 @@ def pytest_addoption(parser):
     parser.addoption("--url", action="store", default="http://test.r90244di.beget.tech/", help="This is request url")
 
 
-@pytest.fixture
+@pytest.fixture (scope='session')
 def get_driver(request):
     browser = request.config.getoption("--browser")
     url = request.config.getoption("--url")
@@ -20,7 +20,7 @@ def get_driver(request):
         driver = webdriver.Edge('msedgedriver.exe')
     else:
         options = webdriver.ChromeOptions()
-        options.add_argument("--headless")
+        # options.add_argument("--headless")
         driver = webdriver.Chrome(options=options)
 
     yield driver, url

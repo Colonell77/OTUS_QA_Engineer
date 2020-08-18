@@ -1,7 +1,13 @@
+from Pages.BasePage import BasePage
 
-
-def test_(get_driver):
-    driver = get_driver[0]
-    url = get_driver[1]
+def test_logo(get_driver):
+    driver, url = get_driver
     driver.get(url)
-    assert driver.title == 'Интернет магазин Opencart "Русская сборка"'
+    driver.find_element(*BasePage.LOGO)
+
+def test_go_to_mac(get_driver):
+    driver, url = get_driver
+    driver.get(url)
+    l1 = driver.find_element(*BasePage.LINK_TO_MENU_1)
+    l2 = l1.find_element(*BasePage.LINK_TO_MAC).click()
+    driver.find_element_by_id('sddd')
